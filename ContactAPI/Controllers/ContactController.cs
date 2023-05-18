@@ -68,7 +68,7 @@ namespace ContactAPI.Controllers
             var contact = _repo.GetContactById(id);
             if (contact == null)
             {
-                return NotFound();
+                return NotFound("Contact Not Found.");
             }
             return Ok(contact);
         }

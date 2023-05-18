@@ -8,12 +8,15 @@ namespace ContactWEB.Repository.RestApi
     {
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configs;
-        public ContactRepository(IConfiguration configs)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public ContactRepository(IConfiguration configs, IHttpContextAccessor httpContextAccessor)
         {
             var httpClientHandler = new HttpClientHandler();
             httpClientHandler.ServerCertificateCustomValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
             _httpClient = new HttpClient(httpClientHandler);
             _configs = configs;
+            _httpContextAccessor = httpContextAccessor;
             _httpClient.BaseAddress = new Uri("https://localhost:7066");
         }
         public async Task<Contact> AddContact(Contact newContact, string token)
@@ -99,5 +102,9 @@ namespace ContactWEB.Repository.RestApi
             }
         }
 
+        private string GetTokenFromHttpContext()
+        {
+            return _httpContextAccessor.HttpContext?.Session.GetString("JWToken");
+        }
     }
 }

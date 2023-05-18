@@ -4,11 +4,12 @@ namespace ContactAPI.DTO
 {
     public class LoginDTO
     {
-        [Required]
         [EmailAddress]
+        [Required(ErrorMessage = "Username field is required")]
         public string UserName { get; set; }
-        [Required]
+
         [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Password field is required")]
         public string Password { get; set; }
 
         [Display(Name = "Remember Me")]

@@ -1,0 +1,10 @@
+﻿@section scripts {
+    <script>
+        $(function () {
+            var loggedIn = '@(ViewBag.LoggedIn ?? false)';
+            if (loggedIn) {
+                $('#loggedInModal').modal('show');
+            }
+        });
+    </script>
+}

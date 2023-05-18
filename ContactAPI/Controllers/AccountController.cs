@@ -74,7 +74,7 @@ namespace ContactAPI.Controllers
                         var theKey = new SymmetricSecurityKey(keyBytes); // 256 bits of key
                         var creds = new SigningCredentials(theKey, SecurityAlgorithms.HmacSha256);
                         var token = new JwtSecurityToken(issuer, audience, null, expires: DateTime.Now.AddMinutes(30), signingCredentials: creds);
-                        return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token), userId = user.Id });
+                        return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token)});
                         // token 
                     }
                 }

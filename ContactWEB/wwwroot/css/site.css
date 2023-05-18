@@ -100,7 +100,7 @@ nav{
 #app {
     font-size: 11px;
     color: red;
-    margin-top: -0.1rem;
+    margin-top: -0.01rem;
     font-weight: bold;
 }
 #SystemName {
@@ -112,3 +112,25 @@ nav{
     font-weight: bold;
 }
 
+/*HOME DESIGN*/
+#homeKrung {
+    font-weight: bold;
+    font-size: 80px;
+}
+
+#homeApp {
+    font-size: 45px;
+    color: red;
+    position: relative;
+    top: -40px;
+    font-weight: bold;
+}
+
+#homeContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#homeP{
+    width:80%;
+}

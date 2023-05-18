@@ -56,7 +56,8 @@ namespace ContactWEB.Controllers
                 {
                     // add token to session 
                     HttpContext.Session.SetString("JWToken", result);
-                   
+                    ViewBag.LoggedIn = true;
+
                     return RedirectToAction("GetAllContacts", "Contact");
                 }
                 ModelState.AddModelError(string.Empty, "Invalid Login Credentials");
