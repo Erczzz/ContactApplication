@@ -66,8 +66,22 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+// policy who can access it
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy(
+        name: MyAllowSpecificOrigins, policy => {
+            policy.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        }
+   );
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("v1", new OpenApiInfo { Title = "ContactAPI", Version = "v1" });
@@ -130,6 +144,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseMiddleware<ApiKeyAuthMiddleware>();
 app.UseAuthentication();
