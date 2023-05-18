@@ -1,0 +1,53 @@
+﻿@model ContactWEB.Model.Contact
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="background-overlay"></div>
+<h5 id="CreateH5">CREATE CONTACT</h5>
+
+<hr />
+<div class="container" id="CreateContainer">
+    <div>
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">First Name</label> <span asp-validation-for="FirstName" class="text-danger"></span>
+                <input placeholder="Enter contact's first name..." asp-for="FirstName" class="form-control" />
+                
+            </div>
+            <div class="form-group">
+                <label class="control-label">Last Name</label> <span asp-validation-for="LastName" class="text-danger"></span>
+                <input placeholder="Enter contact's last name..." asp-for="LastName" class="form-control" />
+                
+            </div>
+            <div class="form-group">
+                <label class="control-label">Contact No</label> <span asp-validation-for="ContactNo" class="text-danger"></span>
+                <input placeholder="Enter contact number..." asp-for="ContactNo" class="form-control" />
+                
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label> <span asp-validation-for="Email" class="text-danger"></span>
+                <input placeholder="Enter contact's email (Optional)..." asp-for="Email" class="form-control" />
+                
+            </div>
+            <div class="form-group">
+                <label asp-for="Relation" class="control-label"></label> <span asp-validation-for="Relation" class="text-danger"></span>
+                <input placeholder="Enter your relationship with the contact (Optional)..." asp-for="Relation" class="form-control" />
+                
+            </div>
+                <div class="form-group">
+                    <input style="width: 100%; margin-top: 5px;" class="btn btn-dark" type="submit" value="CREATE" />
+                </div>
+                <div>
+                    <a style="width: 100%; margin-top: 5px;"  class="btn btn-danger" asp-action="GetAllContacts">CANCEL</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

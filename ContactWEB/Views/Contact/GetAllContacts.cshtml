@@ -1,0 +1,81 @@
+﻿@model IEnumerable<ContactWEB.Model.Contact>
+
+@{
+    ViewData["Title"] = "GetAllContacts";
+}
+<div class="background-overlay"></div>
+<div class="container" id="GetAllContactsContainer">
+    <div class="container d-flex justify-content-between p-0">
+        <h4 id="GetAllContactsH4">CONTACTS</h4>
+
+        <p>
+            <a class="btn btn-outline-dark" asp-action="Create">Create New Contact</a>
+        </p>
+    </div>
+    <table class="table table-sm table-striped table-hover table-dark">
+        <thead class="thead-dark" id="thead">
+            <tr>
+                <th scope="col">
+                    FIRST NAME
+                </th>
+                <th scope="col">
+                    LAST NAME
+                </th>
+                <th scope="col">
+                    CONTACT NO
+                </th>
+                <th scope="col">
+                    EMAIL ADDRESS
+                </th>
+                <th scope="col">
+                    RELATION
+                </th>
+                <th scope="col">ACTION</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td scope="row">
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td scope="row">
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td scope="row">
+                        @Html.DisplayFor(modelItem => item.ContactNo)
+                    </td>
+                    <td scope="row">
+                        @if (string.IsNullOrEmpty(item.Email))
+                        {
+                            <span>NA</span>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Email)
+                        }
+                    </td>
+                    <td scope="row">
+                        @if (string.IsNullOrEmpty(item.Relation))
+                        {
+                            <span>NA</span>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Relation)
+                        }
+                    </td>
+                    <td scope="row">
+                        <div class="btn-group" id="btnGroup">
+                            <a class="btn btn-dark btn-sm" style="background-color:transparent" asp-action="Edit" asp-route-id="@item.ContactId"><span style="color:#0078D7"><i class="bi bi-pencil-square"></i></span></a>
+                            <a class="btn btn-dark btn-sm" style="background-color:transparent" asp-action="Details" asp-route-id="@item.ContactId"><span style="color:#3FD93F"><i class="bi bi-file-person"></i></span></a>
+                            <a class="btn btn-dark btn-sm" style="background-color:transparent" asp-action="Delete" asp-route-id="@item.ContactId"><span style="color:#D93E3D"><i class="bi bi-trash"></i></span></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

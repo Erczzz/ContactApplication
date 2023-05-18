@@ -1,0 +1,44 @@
+﻿@model ContactWEB.Model.Contact
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="background-overlay"></div>
+<h5>CONTACT DETAILS</h5>
+<hr />
+<div class="card" style="width: 18rem;">
+    <div class="card-header">
+        <div class="d-flex justify-content-between p-0">
+            <div style="font-weight:bold">
+                @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)
+            </div>
+            <div class="d-flex justify-content-end p-0">
+                <a class="btn btn-light btn-sm" asp-action="Edit" asp-route-id="@Model?.ContactId"><span><i class="bi bi-pencil-square"></i></span></a>&nbsp
+                <a class="btn btn-light btn-sm" asp-action="GetAllContacts"><span><i class="bi bi-house"></i></span></a>
+            </div>
+        </div>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">@Html.DisplayFor(model => model.ContactNo)</li>
+        <li class="list-group-item">
+            @if (string.IsNullOrEmpty(Model.Email))
+            {
+                <span>NA</span>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Email)
+            }
+        </li>
+        <li class="list-group-item">
+            @if (string.IsNullOrEmpty(Model.Relation))
+            {
+                <span>NA</span>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Relation)
+            }
+        </li>
+    </ul>
+</div>
