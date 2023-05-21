@@ -32,7 +32,6 @@ namespace ContactWEB.Controllers
 
         public async Task<IActionResult> CreateAsync()
         {
-
             return View();
         }
 

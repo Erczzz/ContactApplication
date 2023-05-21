@@ -2,28 +2,41 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Single Page Application</title>
+
+    <style>
+        button {
+            background-color: red;
+            color: white;
+            border: none;
+            width: 150px;
+            height: 40px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+            button:hover {
+                background-color: #FF7F7F;
+            }
+        textarea{
+            width: 250px;
+            height:100px;
+        }
+    </style>
 </head>
 <body>
-    <center>Login Page</center>
+    <br /><center><h2>Single Page Application Sample</h2></center><br />
     <div align="center">
         <form style="width: 500px;">
-            <div class="container">
-                <label>User name:</label>
-                <input type="text" required />
-                <label>Password:</label>
-                <input type="password" required />
-                <button type="button" onclick="btnLogin()">Login</button>
+            <div class="container" id="loginTokenContainer">
+                <button type="button" onclick="btnLogin()">GENERATE TOKEN</button><br /><br />
+                <!--List of contacts-->
+                <label>Display Token: </label><br />
+                <textarea id="listallcontacts"></textarea>
             </div>
         </form>
     </div>
-    <!--List of todos-->
-    <div id="listallcontacts">
-
-    </div>
 
     <script>
-
         function btnLogin() {
             // rest api's and then start writing the functionality
             // httpclient = js http client  -> ajax which can be used for http client

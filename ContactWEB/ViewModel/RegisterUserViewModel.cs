@@ -6,8 +6,10 @@ namespace ContactWEB.ViewModels
     {
         // view validations
         [Required(ErrorMessage = "This field is required")]
+        [RegularExpression(@"^[A-Za-z\s]+$", ErrorMessage = "First Name must contain only letters and spaces.")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "This field is required")]
+        [RegularExpression(@"^[A-Za-z\s]+$", ErrorMessage = "Last Name must contain only letters and spaces.")]
         public string LastName { get; set; }
         public string UserName { get; set; }
         [Required(ErrorMessage = "This field is required")]

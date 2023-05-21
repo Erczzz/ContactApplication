@@ -86,7 +86,5 @@ namespace ContactAPI.Controllers
             }
             return BadRequest(ModelState);
         }
-
-
     }
 }

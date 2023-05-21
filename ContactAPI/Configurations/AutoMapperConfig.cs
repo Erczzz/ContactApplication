@@ -13,6 +13,7 @@ namespace ContactAPI.Configurations
             CreateMap<ApplicationUser, SignUpDTO>().ReverseMap()
             .ForMember(f => f.UserName, t2 => t2.MapFrom(src => src.Email));
             CreateMap<Contact, ContactDTO>().ReverseMap();
+            CreateMap<Contact, GetAllContactsDTO>().ReverseMap();
         }
     }
 }

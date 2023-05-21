@@ -14,7 +14,6 @@ using System.Security.Claims;
 namespace ContactAPI.Controllers
 {
     [ApiController]
-
     public class ContactController : ControllerBase
     {
         private readonly IContactDBRepository _repo;
@@ -33,11 +32,13 @@ namespace ContactAPI.Controllers
 
         [Authorize]
         [HttpGet("Contacts")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var contacts = _repo.GetAllContactsAsync();
+            var contacts = await _repo.GetAllContactsAsync();
             return Ok(contacts);
         }
+
+
 
 
         [Authorize]

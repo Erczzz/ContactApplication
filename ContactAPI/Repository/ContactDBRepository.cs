@@ -1,4 +1,5 @@
 ﻿using ContactAPI.Data;
+using ContactAPI.DTO;
 using ContactAPI.Model;
 using ContactAPI.Models;
 using Microsoft.AspNetCore.Identity;
@@ -23,31 +24,31 @@ namespace ContactAPI.Repository
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public IEnumerable<Contact> GetAllContactsAsync()
+        public async Task<List<GetAllContactsDTO>> GetAllContactsAsync()
         {
-            /*var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);*/
-            // var userIdClaim = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-            /*if (userIdClaim != null)
+            var contacts = new List<GetAllContactsDTO>();
+
+            using (var command = _context.Database.GetDbConnection().CreateCommand())
             {
-                string userId = userIdClaim.Value;
-                // Use the userId as needed
-            }*/
-            /*string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;*/
-            var contacts = _context.Contacts
-                .FromSqlRaw("EXECUTE GetAllContacts")
-                .AsNoTracking()
-                .ToList();
+                command.CommandText = "GetAllContacts";
+                command.CommandType = CommandType.StoredProcedure;
 
-            /*var userIds = contacts.Select(c => c.ApplicationUserId).Distinct().ToList();
+                await _context.Database.OpenConnectionAsync();
 
-            var users = _context.Users
-                .Where(u => userIds.Contains(u.Id))
-                .ToList();
-
-            foreach (var contact in contacts)
-            {
-                contact.ApplicationUser = users.FirstOrDefault(u => u.Id == contact.ApplicationUserId);
-            }*/
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        contacts.Add(new GetAllContactsDTO
+                        {
+                            ContactId = reader.GetInt32(0),
+                            FirstName = reader.GetString(1),
+                            LastName = reader.GetString(2),
+                            ContactNo = reader.GetString(3)
+                        });
+                    }
+                }
+            }
 
             return contacts;
         }
@@ -63,8 +64,6 @@ namespace ContactAPI.Repository
 
             return contacts;
         }
-
-
 
         public Contact AddContact(Contact newContact)
         {
@@ -85,9 +84,6 @@ namespace ContactAPI.Repository
 
             return newContact;
         }
-
-
-
 
         public Contact UpdateContact(int contactId, Contact updatedContact)
         {
@@ -119,10 +115,6 @@ namespace ContactAPI.Repository
             return existingContact;
         }
 
-
-
-
-
         public Contact DeleteContact(int contactId)
         {
             var contact = _context.Contacts.Find(contactId);
@@ -134,14 +126,5 @@ namespace ContactAPI.Repository
             }
             return contact;
         }
-/*        public IEnumerable<string> GetApplicationUserIds()
-        {
-            var applicationUserIds = _context.Contacts
-                .Select(c => c.ApplicationUserId)
-                .Distinct()
-                .ToList();
-
-            return applicationUserIds;
-        }*/
     }
 }

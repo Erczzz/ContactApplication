@@ -71,7 +71,7 @@ namespace ContactWEB.Controllers
             HttpContext.Session.Clear();
 
             // Redirect to the login page or any other desired page
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("GetAllContacts", "Contact");
         }
 
         private bool IsUserAuthenticated()

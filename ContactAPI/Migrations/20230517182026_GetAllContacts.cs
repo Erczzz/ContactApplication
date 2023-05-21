@@ -12,7 +12,7 @@ namespace ContactAPI.Migrations
             AS
             BEGIN
                 SET NOCOUNT ON;
-                SELECT *
+                SELECT ContactId, FirstName, LastName, ContactNo
                 FROM Contacts
             END";
             migrationBuilder.Sql(sp);

@@ -24,12 +24,6 @@
                 <th scope="col">
                     CONTACT NO
                 </th>
-                <th scope="col">
-                    EMAIL ADDRESS
-                </th>
-                <th scope="col">
-                    RELATION
-                </th>
                 <th scope="col">ACTION</th>
             </tr>
         </thead>
@@ -46,26 +40,7 @@
                     <td scope="row">
                         @Html.DisplayFor(modelItem => item.ContactNo)
                     </td>
-                    <td scope="row">
-                        @if (string.IsNullOrEmpty(item.Email))
-                        {
-                            <span>NA</span>
-                        }
-                        else
-                        {
-                            @Html.DisplayFor(modelItem => item.Email)
-                        }
-                    </td>
-                    <td scope="row">
-                        @if (string.IsNullOrEmpty(item.Relation))
-                        {
-                            <span>NA</span>
-                        }
-                        else
-                        {
-                            @Html.DisplayFor(modelItem => item.Relation)
-                        }
-                    </td>
+                  
                     <td scope="row">
                         <div class="btn-group" id="btnGroup">
                             <a class="btn btn-primary btn-sm"  asp-action="Edit" asp-route-id="@item.ContactId"><i class="bi bi-pencil-square"></i></a>
