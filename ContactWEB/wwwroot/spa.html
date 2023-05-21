@@ -31,7 +31,7 @@
                 <button type="button" onclick="btnLogin()">GENERATE TOKEN</button><br /><br />
                 <!--List of contacts-->
                 <label>Display Token: </label><br />
-                <textarea id="listallcontacts"></textarea>
+                <textarea readonly id="generatetoken"></textarea>
             </div>
         </form>
     </div>
@@ -43,11 +43,12 @@
             var httpClient = new XMLHttpRequest();
             httpClient.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("listallcontacts").innerHTML = this.responseText;
+                    document.getElementById("generatetoken").innerHTML = this.responseText;
                     console.log(this.responseText);
                 }
-                else {
-                    console.log("No Response");
+                else if (this.readyState == 4 && this.status == 400) {
+                    document.getElementById("generatetoken").innerHTML = "Failed to display Token. Invalid Username or Password.";
+                    console.log(" Failed to display Token. Invalid Username or Password.");
                 }
             }
             httpClient.open("POST", "https://localhost:7066/Login", true)
